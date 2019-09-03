@@ -1,0 +1,9 @@
+{
+  "name": "alexa-skill-kit-sdk-triviaskill",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "alexa-sdk": "^1.0.25",
+    "node-fetch": "^2.6.0"
+  }
+}
