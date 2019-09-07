@@ -1,42 +1,23 @@
 [
-	{
-		"When was the first money issued in the Western World?": [
-			"1690",
-			"1504",
-			"1812",
-			"1702"
-		]
-	},
-	{
-		"What was a first key step to combating counterfeiting?": [
-			"Plate blocks",
-			"Watermark",
-			"Larger off-center portraits",
-			"Bills change color under ultraviolet light"
-		]
-	},
-	{
-		"What country developed the first true paper money?": [
-			"China",
-			"Italy",
-			"United States",
-			"Russia"
-		]
-	},
-	{
-		"What King introduced the penny?": [
-			"Pepin the Short",
-			"Henry VIII",
-			"Alexander the Great",
-			"Vlad the Impailer"
-		]
-	},
-	{
-		"What commodity and staple of the human diet was used as currency starting in the 17th century?": [
-			"Salt",
-			"Wine",
-			"Bread",
-			"Dried fruit"
-		]
-	}
+{
+"question": [
+"test",
+"test2",
+"test3"
+]
+},
+{
+"words": [
+"test4",
+"test5",
+"test6"
+]
+},
+{
+"another questions": [
+"test7",
+"test9",
+"test9"
+]
+}
 ]

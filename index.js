@@ -12,14 +12,32 @@
 
 'use strict';
 
+process.chdir('/tmp'); 
+
 const Alexa = require('alexa-sdk');
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const makePlainText = Alexa.utils.TextUtils.makePlainText;
 const makeRichText = Alexa.utils.TextUtils.makeRichText;
 const makeImage = Alexa.utils.ImageUtils.makeImage;
-const questions = require('./questionResponse.json');
+const request = require('request');
 
-const ANSWER_COUNT = 4; // The number of possible answers per trivia question.
-const GAME_LENGTH = 5;  // The number of questions per trivia game.
+function getQuestions() {
+        var request = new XMLHttpRequest();
+        request.open('GET', 'http://162.248.88.89:8081/getQuestions', false);  // `false` makes the request synchronous
+        request.send(null);
+
+        if (request.status === 200) {
+          console.log('QUESTIONS! ' + request.responseText);
+          return JSON.parse(request.responseText);
+        }
+}
+
+const questions = getQuestions();
+
+// const questions = require('questionResponse.json');
+// console.log('QUESTIONS! ' + questions);
+const ANSWER_COUNT = 3; // The number of possible answers per trivia question.
+const GAME_LENGTH = 3;  // The number of questions per trivia game.
 const GAME_STATES = {
     TRIVIA: '_TRIVIAMODE', // Asking trivia questions.
     START: '_STARTMODE', // Entry point, start the game.
@@ -107,8 +125,10 @@ const newSessionHandlers = {
 
 function populateGameQuestions(translatedQuestions) {
     console.log('in populateGameQuestions method');
+    // getData();
     const gameQuestions = [];
     const indexList = [];
+    console.log('translatedQuestions in populateGame', translatedQuestions);
     let index = translatedQuestions.length;
     console.log('index ', index); //index 30
 
@@ -305,7 +325,9 @@ const startStateHandlers = Alexa.CreateStateHandler(GAME_STATES.START, {
     'StartGame': function (newGame) {
         let speechOutput = newGame ? this.t('NEW_GAME_MESSAGE', this.t('GAME_NAME')) + this.t('WELCOME_MESSAGE', GAME_LENGTH.toString()) : '';
         // Select GAME_LENGTH questions for the game
+        let xhr = new XMLHttpRequest();
         const translatedQuestions = this.t('QUESTIONS');
+
         const gameQuestions = populateGameQuestions(translatedQuestions);
         // Generate a random index for the correct answer, from 0 to 3
         const correctAnswerIndex = Math.floor(Math.random() * (ANSWER_COUNT));
